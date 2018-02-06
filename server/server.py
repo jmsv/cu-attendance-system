@@ -16,7 +16,7 @@ def attend():
 @app.route("/placeholder")
 def student_attendance():
     student_id = request.args.get('user')
-    return get_attendance.attendance():
+    return get_attendance.attendance()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
