@@ -1,11 +1,22 @@
-from flask import Flask, request
-import attending
-import get_attendance
+from flask import Flask, request, jsonify, render_template, send_from_directory
+import attending, get_attendance
 app = Flask(__name__)
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('templates/js', path)
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('templates/css', path)
+
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def site_index():
+    return render_template('index.html')
+
+@app.route('/hello')
+def hello():
+    return "hello"
 
 @app.route("/attend")
 def attend():
