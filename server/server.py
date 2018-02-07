@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
 
 # Import other code files
-import attending, get_attendance
+import attending
 
 app = Flask(__name__)
 
@@ -31,7 +31,7 @@ def attend():
 @app.route("/api/student-attendance-history")
 def student_attendance():
     student_id = request.args.get('user')
-    return get_attendance.attendance()
+    return attending.attendance()
 
 
 # Run server for testing

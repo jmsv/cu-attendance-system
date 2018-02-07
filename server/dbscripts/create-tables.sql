@@ -1,0 +1,15 @@
+CREATE TABLE Attendance (
+  sid INTEGER NOT NULL,
+  arrival DATETIME, /* Input in format: '2007-01-01 10:00:00' */
+  event_id VARCHAR(16) NOT NULL
+);
+
+
+/* Data examples */
+
+INSERT INTO Attendance VALUES (7085352, '2018-02-07 09:04:22', '31bf1addd9914e49');
+INSERT INTO Attendance VALUES (6995666, '2007-01-01 09:01:59', '31bf1addd9914e49');
+INSERT INTO Attendance VALUES (7011184, '2007-01-01 09:19:01', '31bf1addd9914e49');
+INSERT INTO Attendance VALUES (7085352, '2007-01-01 11:32:15', 'f84ce22d07f54e18');
+INSERT INTO Attendance VALUES (7000001, '2007-01-01 11:02:46', 'f84ce22d07f54e18');
+
