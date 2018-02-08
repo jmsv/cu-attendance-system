@@ -3,13 +3,19 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 # Import other code files
 import attending
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='static', static_folder='static')
 
 
 # Website index
 @app.route('/')
 def site_index():
     return render_template('index.html')
+
+
+# Assets
+@app.route('/static/<path:path>')
+def get_assets(path):
+    return send_from_directory(app.static_folder, path)
 
 
 # Test endpoint for checking server is working
@@ -31,9 +37,7 @@ def attend():
 @app.route("/api/student-attendance-history")
 def student_attendance():
     student_id = request.args.get('user')
-    json_attendance = jsonify(attending.attendance(student_id))
-    return json_attendance
-
+    return jsonify(attending.attendance(student_id))
 
 
 # Run server for testing
