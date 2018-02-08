@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>cuas: Coventry University Attendance System</title>
+
+    <style>
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0.67;
+            }
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0.67;
+            }
+        }
+
+        body {
+            background: #007bff;
+        }
+
+        .description {
+            color: white;
+            margin-top: 40px;
+            font-family: 'Roboto', sans-serif;
+            -webkit-animation: fadein 3s;
+            -moz-animation: fadein 3s;
+            -ms-animation: fadein 3s;
+            -o-animation: fadein 3s;
+            animation: fadein 3s;
+            font-size: 2.2em;
+            opacity: 0.67;
+        }
+
+        .link {
+            border: 0;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            text-align: center;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <a href="http://cu-attendance.net" class="link">
+            <img src="static/cuas-logo-white.svg" width="48%" />
+            <h2 class="description">Coventry University Attendance System</h2>
+        </a>
+    </div>
+</body>
+
+</html>

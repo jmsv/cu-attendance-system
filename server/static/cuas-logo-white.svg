@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="logo"
+   viewBox="0 0 1000 320"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="cuas-logo-white.svg">
+  <metadata
+     id="metadata4295">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>cuas-logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     id="namedview4293"
+     showgrid="false"
+     inkscape:zoom="0.92560278"
+     inkscape:cx="472.48412"
+     inkscape:cy="216.7368"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="logo" />
+  <defs
+     id="defs4273">
+    <style
+       id="style4275">.cls-1{fill:#007bff;}</style>
+  </defs>
+  <title
+     id="title4277">cuas-logo</title>
+  <path
+     class="cls-1"
+     d="M60.82,297.1Q34.2,281,19.14,252.41T4.07,187.62q0-36.16,14.82-64.79t41.43-44.7q26.61-16.07,60.27-16.07,28.63,0,50,12.3t38.92,34.9l-25.11,19.59Q159.75,93.21,120.58,93.2,97,93.2,78.15,105.25T48.77,138.9q-10.55,21.6-10.55,48.72t10.55,48.72Q59.31,257.93,78.15,270T120.58,282q24.11,0,39.68-8.29t28.12-24.36L215,268a123,123,0,0,1-40.93,32.9,114.81,114.81,0,0,1-52.48,12.3Q87.43,313.17,60.82,297.1Z"
+     id="path4279"
+     style="fill:#ffffff" />
+  <path
+     class="cls-1"
+     d="M465.6,70.1v235H431.45V266q-12.05,22.6-31.89,34.9t-46,12.3a103.32,103.32,0,0,1-45.45-10A78.74,78.74,0,0,1,275,273.5q-12.31-19.59-12.3-46.2V70.1h34.15V212.23q0,69.81,62.27,69.81,36.16,0,54.24-25.61t18.08-68.8V70.1Z"
+     id="path4281"
+     style="fill:#ffffff" />
+  <path
+     class="cls-1"
+     d="M747.34,70.1v235H713.19V270.48a104.79,104.79,0,0,1-35.66,31.39,96.31,96.31,0,0,1-46.21,11.3q-33.65,0-60.27-16.07t-41.68-44.7q-15.07-28.63-15.07-65.29,0-36.16,14.81-64.53a111.18,111.18,0,0,1,41.18-44.45q26.37-16.07,60-16.07a98.8,98.8,0,0,1,47,11.3,102.23,102.23,0,0,1,35.91,31.89V70.1ZM673.26,270q18.83-12.05,29.38-33.65t10.55-48.72q0-27.12-10.55-48.72t-29.38-33.65Q654.43,93.2,630.33,93.2q-23.61,0-42.19,12.05T559,138.65Q548.46,160,548.46,187.12q0,27.63,10.55,49.22T588.14,270Q606.71,282,630.33,282,654.43,282,673.26,270Z"
+     id="path4283"
+     style="fill:#ffffff" />
+  <path
+     class="cls-1"
+     d="M833.47,298.61A96.43,96.43,0,0,1,794,257.43l30.64-15.07Q843.25,282,897.5,282q26.11,0,43.19-9.54t17.08-29.63q0-20.59-13.81-30.63t-48.46-13.06q-48.21-4-69.05-21.6t-20.84-46.71q0-32.64,23.6-50.72T894,62.06q69.8,0,94.92,55.24l-30.63,15.07q-8.55-20.08-24.86-29.63T891.47,93.2q-26.12,0-39.93,9.54t-13.81,27.12q0,16.57,14.82,26.87t51,13.31q44.69,4,66.54,21.85t21.85,47q0,23.61-13.56,40.43T942.2,304.64a136.81,136.81,0,0,1-48.71,8.54Q859.32,313.17,833.47,298.61Z"
+     id="path4285"
+     style="fill:#ffffff" />
+  <path
+     class="cls-1"
+     d="M102.43,86.31h35.13V40.71h14.72a1.6,1.6,0,0,0,1.6-1.6V15.47a1.6,1.6,0,0,0-1.6-1.6H87.71a1.6,1.6,0,0,0-1.6,1.6V39.11a1.6,1.6,0,0,0,1.6,1.6h14.72Z"
+     id="path4287"
+     style="fill:#ffffff" />
+  <rect
+     class="cls-1"
+     x="31.68"
+     y="58.5"
+     width="31.17"
+     height="44.97"
+     rx="1.59"
+     ry="1.59"
+     transform="translate(-39.02 44.27) rotate(-36.68)"
+     id="rect4289"
+     style="fill:#ffffff" />
+  <path
+     class="cls-1"
+     d="M164.53,123.81c-.79.68-1.61,1.32-2.36,2q-17.27,16.53-34.52,33.07-11.25,10.79-22.49,21.59a15.42,15.42,0,0,0-4.79,9.32,18.44,18.44,0,0,0,11.17,19.95c9,4,21.13-.47,24.18-10.16,1-3.2,2.43-6.27,3.64-9.41q10.9-28.1,21.79-56.19c1.27-3.29,2.5-6.6,3.74-9.9Z"
+     id="path4291"
+     style="fill:#ffffff" />
+</svg>

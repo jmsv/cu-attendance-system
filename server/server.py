@@ -12,6 +12,12 @@ def site_index():
     return render_template('index.html')
 
 
+# Splash screen
+@app.route('/splash')
+def site_splash():
+    return render_template('splash.html')
+
+
 # Assets
 @app.route('/static/<path:path>')
 def get_assets(path):
@@ -29,7 +35,9 @@ def hello():
 @app.route("/api/register-attendance")
 def attend():
     student_id = request.args.get('user')
+    print student_id
     event_uuid = request.args.get('event')
+    print event_uuid
     return attending.attend(student_id, event_uuid)
 
 
@@ -42,4 +50,8 @@ def student_attendance():
 
 # Run server for testing
 if __name__ == "__main__":
+    app.config.update(
+        DEBUG = True,
+        TEMPLATES_AUTO_RELOAD = True
+    )
     app.run()
