@@ -31,7 +31,9 @@ def attend():
 @app.route("/api/student-attendance-history")
 def student_attendance():
     student_id = request.args.get('user')
-    return attending.attendance()
+    json_attendance = jsonify(attending.attendance(student_id))
+    return json_attendance
+
 
 
 # Run server for testing

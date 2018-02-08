@@ -15,7 +15,10 @@ def attend(student_id,event_uuid):
     return True
 
 
-def attendance():
+def attendance(student_id):3
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    return {}
+    c.execute("SELECT * FROM Attendance WHERE sid = '%s'" % student_id)
+    attendance = c.fetchall()
+    conn.close
+    return attendance
