@@ -18,6 +18,12 @@ def site_splash():
     return render_template('splash.html')
 
 
+# Lecturer login
+@app.route('/lecturer-login')
+def site_lecturer_login():
+    return render_template('lecturer-login.html')
+
+
 # Assets
 @app.route('/static/<path:path>')
 def get_assets(path):
@@ -35,9 +41,7 @@ def hello():
 @app.route("/api/register-attendance")
 def attend():
     student_id = request.args.get('user')
-    print student_id
     event_uuid = request.args.get('event')
-    print event_uuid
     return attending.attend(student_id, event_uuid)
 
 
