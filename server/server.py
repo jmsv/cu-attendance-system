@@ -38,15 +38,23 @@ def hello():
 
 # Endpoint called when student signs into their class
 # TODO: Make this a POST method (not GET)
-@app.route("/api/register-attendance")
+@app.route('/api/register-attendance', methods=['POST','GET'])
 def attend():
-    student_id = request.args.get('user')
-    event_uuid = request.args.get('event')
-    return attending.attend(student_id, event_uuid)
+    if request.method =='POST':
+        student_id = request.form['user']
+        event_uuid = request.form['event']
+        return attending.attend(student_id, event_uuid)
+        
+    return '''<form method="post">
+                student_id: <input type="text" name="user"><br>
+                event_uuid: <input type="text" name="event">
+                <input type="submit">
+              </form>
+           '''
 
 
 # Get student's attendance history
-@app.route("/api/student-attendance-history")
+@app.route('/api/student-attendance-history')
 def student_attendance():
     student_id = request.args.get('user')
     return jsonify(attending.attendance(student_id))
