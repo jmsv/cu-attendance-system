@@ -29,3 +29,18 @@ def attendance(student_id):
     conn.close
     print(attendance)
     return attendance
+
+def event_attendance(event_uuid):
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    c.execute("SELECT * FROM Attendance WHERE event_id = '%s'" % event_uuid)
+    event_attendance = []
+    for row in c:
+        cur = {}
+        cur['sid'] = row[0]
+        cur['arrival'] = row[1]
+        cur['event_id'] = row[2]
+        event_attendance.append(cur)
+    conn.close
+    print(event_attendance)
+    return event_attendance

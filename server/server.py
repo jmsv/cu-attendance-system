@@ -60,6 +60,13 @@ def student_attendance():
     return jsonify(attending.attendance(student_id))
 
 
+# Get event's attendance history
+@app.route('/api/event-attendance-history')
+def event_attendance():
+    event_uuid = request.args.get('event')
+    return jsonify(attending.event_attendance(event_uuid))
+
+
 # Run server for testing
 if __name__ == "__main__":
     app.config.update(
