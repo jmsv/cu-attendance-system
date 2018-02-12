@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignIntoClass"></activity>
+        <activity android:name=".ScanToAttend" />
+        <activity android:name=".RegisterAttendance"></activity>
     </application>
 
 </manifest>
