@@ -37,40 +37,32 @@ def hello():
 
 
 # Endpoint called when student signs into their class
-# TODO: Make this a POST method (not GET)
-@app.route('/api/register-attendance', methods=['POST','GET'])
+@app.route('/api/register-attendance', methods=['POST'])
 def attend():
-    if request.method =='POST':
-        student_id = request.form['user']
-        event_uuid = request.form['event']
-        return attending.attend(student_id, event_uuid)
-        
-    return '''<form method="post">
-                student_id: <input type="text" name="user"><br>
-                event_uuid: <input type="text" name="event">
-                <input type="submit">
-              </form>
-           '''
+    student_id = request.form['user']
+    event_uuid = request.form['event']
+    # TODO: If either of the above values aren't present in the request, return 400
+    return jsonify({'ok': attending.attend(student_id, event_uuid)})
 
 
 # Get student's attendance history
-@app.route('/api/student-attendance-history')
+@app.route('/api/student-attendance-history', methods=['GET'])
 def student_attendance():
     student_id = request.args.get('user')
     return jsonify(attending.attendance(student_id))
 
 
 # Get event's attendance history
-@app.route('/api/event-attendance-history')
+@app.route('/api/event-attendance-history', methods=['GET'])
 def event_attendance():
-    event_uuid = request.args.get('event')
+    event_uuid = str(request.args.get('event'))
     return jsonify(attending.event_attendance(event_uuid))
 
 
 # Run server for testing
 if __name__ == "__main__":
     app.config.update(
-        DEBUG = True,
-        TEMPLATES_AUTO_RELOAD = True
+        DEBUG=True,
+        TEMPLATES_AUTO_RELOAD=True
     )
     app.run()
