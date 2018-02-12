@@ -1,40 +1,33 @@
 CREATE TABLE Student(
-StudentID NUMBER(7) NOT NULL PRIMARY KEY,
-Name CHAR(30),
-Username VARCHAR(15));
+	sid INT NOT NULL PRIMARY KEY,
+	name VARCHAR(64),
+	username VARCHAR(16)
+);
 
 CREATE TABLE Lecturer(
-LecturerID VARCHAR(8) NOT NULL PRIMARY KEY,
-LecturerFirstName CHAR(15),
-PasswordHash VARCHAR(16)
+	lecturer_id INT NOT NULL PRIMARY KEY,
+	name VARCHAR(64),
+	password_hash VARCHAR(64)
+);
 
 CREATE TABLE Events(
-EventID VARCHAR(23) NOT NULL PRIMARY KEY,
-Room VARCHAR(7),
-Date DATE,
-Start TIME,
-Finished TIME,
+	event_id VARCHAR(16) NOT NULL PRIMARY KEY,
+	room VARCHAR(8),
+	datetime_start DATETIME,
+	datetime_end DATETIME,
+  	lecturer_id INT,
+
+	FOREIGN KEY(lecturer_id) REFERENCES Lecturer(lecturer_id)
+);
 
 CREATE TABLE Attendance(
-StudentID NUMBER(7),
-EntryTime TIME,
-EventID VARCHAR(23));
+	sid INT NOT NULL,
+	arrival_time DATETIME NOT NULL,
+	event_id VARCHAR(16) NOT NULL,
 
-ALTER TABLE Attendance(
-ADD CONSTRAINT PK_Attendance PRIMARY KEY (StudentID, EventID));
+	PRIMARY KEY (sid, event_id),
 
-^the above should make the tables
-as for adding values to the tables
+	FOREIGN KEY(event_id) REFERENCES Events(event_id),
+	FOREIGN KEY(sid) REFERENCES Student(sid)
+);
 
-INSERT INTO Student VALUES (12345, 'Jon Doe', 'JDoe1')
-INSERT INTO Student VALUES (13579, 'Alex Smith', 'ASmith1')
-INSERT INTO Student VALUES (24682, 'Rose Joe', 'RJoe1')
-
-INSERT INTO Lecturer VALUES (AB123456, 'Alexia Amazon', #(find out))
-INSERT INTO Lecturer VALUES (AB654321, 'Siri Apple', #(find out))
-
-INSERT INTO Events VALUES (*generated from code*, 'ECG-26', 02/02/2018, 14:00, 18:00)
-INSERT INTO Events VALUES (*generated from code*, 'SHB-02', 02/02/2018, 09:00, 11:00)
-INSERT INTO Events VALUES (*generated from code*, 'EC1-03', 03/02/2018, 15:00, 15:00)
-
-as for the last one ill look at it tomorrow
