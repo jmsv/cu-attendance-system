@@ -4,6 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class RegisterAttendance extends AppCompatActivity {
 
     @Override
@@ -33,5 +41,28 @@ public class RegisterAttendance extends AppCompatActivity {
 
         TextView textViewEventId = findViewById(R.id.textViewEventId);
         textViewEventId.setText("signing into: " + eventId);
+    }
+
+    boolean registerAttendancePost(String event_id) {
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody formBody = new FormBody.Builder()
+                .add("user", "7000000")
+                .add("event", event_id)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://cu-attendance.net/api/register-attendance")
+                .post(formBody)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            if (response.code() == 200) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

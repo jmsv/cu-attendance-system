@@ -22,7 +22,7 @@ CREATE TABLE Events(
 
 CREATE TABLE Attendance(
 	sid INT NOT NULL,
-	arrival_time DATETIME NOT NULL,
+	arrival DATETIME NOT NULL,
 	event_id VARCHAR(16) NOT NULL,
 
 	PRIMARY KEY (sid, event_id),
