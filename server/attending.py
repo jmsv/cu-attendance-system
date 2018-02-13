@@ -59,12 +59,11 @@ def event_lecturer(lecturer_id):
     event_lecturer_list = []
     for row in c:
         cur = {
-            'Event_id': row[0],
-            'Room': row[1],
-            'Date': row[2],
-            'Start': row[3],
-            'Finish': row[4]
-            #add lecturer_id
+            'event_id': row[0],
+            'room': row[1],
+            'datetime_start': row[2],
+            'datetime_end': row[3]
+            'lecturer_id': row[4]
         }
         event_lecturer_list.append(cur)
     conn.close()
