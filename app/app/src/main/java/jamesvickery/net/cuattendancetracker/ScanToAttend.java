@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+
+import java.util.Collections;
+import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -20,7 +24,6 @@ import static android.Manifest.permission.CAMERA;
 public class ScanToAttend extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     // TODO: This class needs to be tidied up a lot.
-    // Toast messages for permissions shouldn't appear etc
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
@@ -31,15 +34,20 @@ public class ScanToAttend extends AppCompatActivity implements ZXingScannerView.
         super.onCreate(savedInstanceState);
 
         scannerView = new ZXingScannerView(this);
+        // Set barcode format: QR codes
+        List<BarcodeFormat> formats = Collections.singletonList(BarcodeFormat.QR_CODE);
+        scannerView.setFormats(formats);
         setContentView(scannerView);
 
+        setTitle("Sign into lecture");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission()) {
-                Toast.makeText(ScanToAttend.this, "Permission granted", Toast.LENGTH_LONG).show();
-            } else {
+            if (!checkPermission()) {
                 requestPermission();
             }
         }
+
+        Snackbar.make(findViewById(android.R.id.content), "Scan QR code to sign into lecture", Snackbar.LENGTH_INDEFINITE).show();
     }
 
     private boolean checkPermission() {
@@ -50,28 +58,38 @@ public class ScanToAttend extends AppCompatActivity implements ZXingScannerView.
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA);
     }
 
+    private void explainPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (shouldShowRequestPermissionRationale(CAMERA)) {
+                AlertDialog alert = new AlertDialog.Builder(ScanToAttend.this)
+                        .setMessage("CU Timetable Tracker needs to access your camera to scan into lectures")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    requestPermissions(new String[]{CAMERA}, REQUEST_CAMERA);
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .create();
+                alert.show();
+            }
+        }
+    }
+
     public void onRequestPermissionsResult(int requestCode, String permissions[], int grantResults[]) {
         switch (requestCode) {
             case REQUEST_CAMERA:
                 if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted) {
-                        Toast.makeText(ScanToAttend.this, "Permission granted 2", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(ScanToAttend.this, "Permission denied", Toast.LENGTH_LONG).show();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(CAMERA)) {
-                                displayAlertMessage("You need to allow access pls", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                            requestPermissions(new String[]{CAMERA}, REQUEST_CAMERA);
-                                        }
-                                    }
-                                });
-                                return;
-                            }
-                        }
+                    if (!cameraAccepted) {
+                        explainPermission();
                     }
                 }
                 break;
@@ -97,14 +115,6 @@ public class ScanToAttend extends AppCompatActivity implements ZXingScannerView.
     public void onDestroy() {
         super.onDestroy();
         scannerView.stopCamera();
-    }
-
-    public void displayAlertMessage(String message, DialogInterface.OnClickListener listener) {
-        new AlertDialog.Builder(ScanToAttend.this)
-                .setMessage(message)
-                .setPositiveButton("OK", listener)
-                .setNegativeButton("Cancel", null)
-                .create().show();
     }
 
     @Override
