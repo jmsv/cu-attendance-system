@@ -1,9 +1,6 @@
-import logging
+import hashlib
 import os
 import sqlite3
-import hashlib
-
-logging.basicConfig(filename='cuas-server.log', level=logging.DEBUG)
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 db_path = dir_path + '/database.db'
@@ -21,7 +18,7 @@ def drop_tables():
         try:
             c.execute(drop)
         except sqlite3.OperationalError as e:
-            logging.info("drop_tables:\t%s" % str(e))
+            print("drop_tables:\t%s" % str(e))
 
     conn.commit()
     conn.close()
@@ -39,7 +36,7 @@ def create_tables():
         try:
             c.execute(create)
         except sqlite3.OperationalError as e:
-            logging.info("create_tables:\t%s" % str(e))
+            print("create_tables:\t%s" % str(e))
 
     conn.commit()
     conn.close()
@@ -62,7 +59,7 @@ def init_lecturers():
             c.execute("INSERT INTO Lecturer VALUES (?, ?, ?);",
                       [l['username'], l['name'], hashlib.sha512(l['password']).hexdigest()])
         except sqlite3.IntegrityError as e:
-            logging.info("init_lecturers:\t%s" % str(e))
+            print("init_lecturers:\t%s" % str(e))
 
     conn.commit()
     conn.close()

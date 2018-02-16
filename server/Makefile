@@ -9,5 +9,5 @@ restart:
 	sudo systemctl restart cuas
 
 monitor:
-	tail -f cuas-server.log
+	tail -f cuas-server.log | less
 

@@ -68,34 +68,50 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
+
+    .collapse {
+      display: none;
+    }
   </style>
 </head>
 
 <body class="text-center">
-  <form class="form-signin">
+  <form id="login-form" class="form-signin" action="#">
     <img class="mb-4" src="./static/cuas-logo.svg" alt="cuas" width="144">
-    <!-- <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> -->
+
+    <div id="error-bar" class="alert alert-danger collapse" role="alert">
+      <strong>Login failed.</strong> Try again?
+    </div>
+
     <label for="inputUsername" class="sr-only">Username</label>
     <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-    <!-- <footer class="pt-4 my-md-5 pt-md-5 border-top">
-      <div class="row" style="text-align:center;">
-        <div class="col-12 col-md">
-          <small class="d-block mb-3 text-muted">View on
-            <a href="https://github.com/jamesevickery/cu-attendance-system">GitHub</a>
-          </small>
-        </div>
-      </div>
-    </footer> -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script>
+    $('#login-form').submit(function () {
+
+      var username = document.getElementById("inputUsername").value;
+      var password = document.getElementById("inputPassword").value;
+
+      $.post("./api/lecturer-login", {
+          username: username,
+          password: password
+        })
+        .done(function (data) {
+          document.getElementById("error-bar").classList.add('collapse');
+          document.cookie = "cuas_lecturer_login_session=" + data;
+          window.location.replace(".");
+        })
+        .fail(function () {
+          document.getElementById("error-bar").classList.remove('collapse');
+        });
+    });
+  </script>
 </body>
 
 </html>
