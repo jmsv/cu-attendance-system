@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
 
-# Import other code files
 import attending
-import database.database_stuff as db
+import logins
+import database.database_create as db
 
-db.create_tables()
+db.get_usable_db()
 
 app = Flask(__name__, template_folder='static', static_folder='static')
 
@@ -45,21 +45,36 @@ def attend():
     student_id = request.form['user']
     event_uuid = request.form['event']
     # TODO: If either of the above values aren't present in the request, return 400
-    return jsonify({'ok': attending.attend(student_id, event_uuid)})
+    return jsonify({'ok': attending.register_student_attendance(student_id, event_uuid)})
 
 
 # Get student's attendance history
 @app.route('/api/student-attendance-history', methods=['GET'])
 def student_attendance():
     student_id = request.args.get('user')
-    return jsonify(attending.attendance(student_id))
+    return jsonify(attending.get_student_attendance(student_id))
 
 
 # Get event's attendance history
 @app.route('/api/event-attendance-history', methods=['GET'])
 def event_attendance():
     event_uuid = str(request.args.get('event'))
-    return jsonify(attending.event_attendance(event_uuid))
+    return jsonify(attending.get_attendance_for_event(event_uuid))
+
+
+# Lecturer login
+@app.route('/api/lecturer-login', methods=['POST'])
+def lecturer_login():
+    username = request.form['username']
+    password = request.form['password']
+    try:
+        key = logins.lecturer_login(username, password)
+    except ValueError:
+        return "Password incorrect", 403
+    except Exception as e:
+        print e
+        return "Error", 500
+    return key
 
 
 # Run server for testing

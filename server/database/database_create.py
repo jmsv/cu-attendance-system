@@ -1,6 +1,7 @@
 import logging
 import os
 import sqlite3
+import hashlib
 
 logging.basicConfig(filename='cuas-server.log', level=logging.DEBUG)
 
@@ -44,6 +45,38 @@ def create_tables():
     conn.close()
 
 
-if __name__ == '__main__':
-    drop_tables()
+def init_lecturers():
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    lecturers = [
+        {
+            'username': 'dr777',
+            'name': 'Dennis Richie',
+            'password': 'avocado on toast'
+        }
+    ]
+
+    for l in lecturers:
+        try:
+            c.execute("INSERT INTO Lecturer VALUES (?, ?, ?);",
+                      [l['username'], l['name'], hashlib.sha512(l['password']).hexdigest()])
+        except sqlite3.IntegrityError as e:
+            logging.info("init_lecturers:\t%s" % str(e))
+
+    conn.commit()
+    conn.close()
+
+
+def get_usable_db():
     create_tables()
+    init_lecturers()
+
+
+def reset_db():
+    drop_tables()
+    get_usable_db()
+
+
+if __name__ == '__main__':
+    reset_db()

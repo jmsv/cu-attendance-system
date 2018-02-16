@@ -6,9 +6,9 @@ CREATE TABLE Student(
 
 
 CREATE TABLE Lecturer(
-  lecturer_id INT NOT NULL PRIMARY KEY,
+  username VARCHAR(16) NOT NULL PRIMARY KEY,
   name VARCHAR(64),
-  password_hash VARCHAR(64)
+  password_hash VARCHAR(128)
 );
 
 
@@ -17,8 +17,8 @@ CREATE TABLE Events(
   room VARCHAR(8),
   datetime_start DATETIME,
   datetime_end DATETIME,
-  lecturer_id INT,
-  FOREIGN KEY(lecturer_id) REFERENCES Lecturer(lecturer_id)
+  lecturer_username INT,
+  FOREIGN KEY(lecturer_username) REFERENCES Lecturer(username)
 );
 
 
@@ -33,10 +33,10 @@ CREATE TABLE Attendance(
 
 
 CREATE TABLE LecturerLoginSessions(
-  lecturer_id INT NOT NULL,
+  lecturer_username INT NOT NULL,
   session_id VARCHAR(32) NOT NULL,
   expires DATETIME NOT NULL,
-  FOREIGN KEY(lecturer_id) REFERENCES Lecturer(lecturer_id)
+  FOREIGN KEY(lecturer_username) REFERENCES Lecturer(username)
 );
 
 
