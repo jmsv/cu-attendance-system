@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 
 # Import other code files
 import attending
+import database.database_stuff as db
+
+db.create_tables()
 
 app = Flask(__name__, template_folder='static', static_folder='static')
 

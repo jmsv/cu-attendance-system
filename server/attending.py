@@ -1,7 +1,7 @@
 import datetime
 import sqlite3
 
-db_path = 'database.db'
+db_path = 'database/database.db'
 
 #attendance table functions
 
@@ -62,7 +62,7 @@ def event_lecturer(lecturer_id):
             'event_id': row[0],
             'room': row[1],
             'datetime_start': row[2],
-            'datetime_end': row[3]
+            'datetime_end': row[3],
             'lecturer_id': row[4]
         }
         event_lecturer_list.append(cur)
