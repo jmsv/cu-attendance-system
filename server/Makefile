@@ -6,6 +6,7 @@ clean:
 	rm database/*.pyc
 
 restart:
+	python database/database_create.py
 	sudo systemctl restart cuas
 
 monitor:
