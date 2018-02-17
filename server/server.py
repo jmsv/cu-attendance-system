@@ -52,7 +52,7 @@ def attend():
     student_id = request.form['user']
     event_uuid = request.form['event']
     if not student_id or not event_uuid:
-        return jsonify({'error' : 'ValueError: SID not found'}),400
+        return jsonify({'error' : 'ValueError: SID or Event_id not found'}),400
     return jsonify({'ok': attending.register_student_attendance(student_id, event_uuid)})
 
 
@@ -70,7 +70,7 @@ def student_attendance():
 def event_attendance():
     event_uuid = request.args.get('event')
     if not event_uuid:
-        return jsonify({'error' : 'ValueError: event not found'}),400
+        return jsonify({'error' : 'ValueError: Event not found'}),400
     return jsonify(attending.get_attendance_for_event(event_uuid))
 
 # Get lecturer's event history
@@ -78,7 +78,7 @@ def event_attendance():
 def lecturer_events():
     lecturer_username = request.args.get('lecturer')
     if not lecturer_username:
-        return jsonify({'error' : 'ValueError: lecturer not found'}),400
+        return jsonify({'error' : 'ValueError: Lecturer not found'}),400
     return jsonify(attending.get_events_by_lecturer(lecturer_username))
 
 # Get event's details
@@ -86,7 +86,7 @@ def lecturer_events():
 def event_details():
     event_id = request.args.get('lecturer')
     if not event_id:
-        return jsonify({'error' : 'ValueError: event not found'}),400
+        return jsonify({'error' : 'ValueError: Event not found'}),400
     return jsonify(attending.get_event(event_id))
 
 
