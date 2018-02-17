@@ -27,6 +27,12 @@ def site_lecturer_login():
     return render_template('lecturer-login.html')
 
 
+# Lecturer webapp
+@app.route('/lecturer-webapp')
+def site_lecturer_webapp():
+    return render_template('lecturer-webapp.html')
+
+
 # Assets
 @app.route('/static/<path:path>')
 def get_assets(path):
