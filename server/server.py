@@ -44,7 +44,8 @@ def hello():
 def attend():
     student_id = request.form['user']
     event_uuid = request.form['event']
-    # TODO: If either of the above values aren't present in the request, return 400
+    if not student_id or not event_uuid:
+        return jsonify({'error' : 'ValueError: SID not found'}),400
     return jsonify({'ok': attending.register_student_attendance(student_id, event_uuid)})
 
 
@@ -52,6 +53,10 @@ def attend():
 @app.route('/api/student-attendance-history', methods=['GET'])
 def student_attendance():
     student_id = request.args.get('user')
+    if not student_id:
+        return jsonify({'error' : 'ValueError: SID not found'}),400
+    elif len(student_id) != 7:
+        return jsonify({'error' : 'ValueError: SID wrong length'}),411
     return jsonify(attending.get_student_attendance(student_id))
 
 
@@ -59,6 +64,8 @@ def student_attendance():
 @app.route('/api/event-attendance-history', methods=['GET'])
 def event_attendance():
     event_uuid = str(request.args.get('event'))
+    if not event_uuid:
+        return jsonify({'error' : 'ValueError: event not found'}),400
     return jsonify(attending.get_attendance_for_event(event_uuid))
 
 
@@ -70,10 +77,10 @@ def lecturer_login():
     try:
         key = logins.lecturer_login(username, password)
     except ValueError:
-        return "Password incorrect", 403
+        return jsonify({'Error': 'Password incorrect'}, 403)
     except Exception as e:
         print e
-        return "Error", 500
+        return jsonify({'Error': 'Internal Server Error'}, 500)
     return key
 
 
