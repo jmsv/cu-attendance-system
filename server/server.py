@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 
 import attending
 import logins
+import validation
 import database.database_create as db
 
 db.get_usable_db()
@@ -61,8 +62,6 @@ def student_attendance():
     student_id = request.args.get('user')
     if not student_id:
         return jsonify({'error' : 'ValueError: SID not found'}),400
-    elif len(student_id) != 7:
-        return jsonify({'error' : 'ValueError: SID wrong length'}),411
     return jsonify(attending.get_student_attendance(student_id))
 
 
@@ -77,10 +76,10 @@ def event_attendance():
 # Get lecturer's event history
 @app.route('/api/lecturer-event-history', methods=['GET'])
 def lecturer_events():
-    lecturer_id = request.args.get('lecturer')
-    if not lecturer_id:
+    lecturer_username = request.args.get('lecturer')
+    if not lecturer_username:
         return jsonify({'error' : 'ValueError: lecturer not found'}),400
-    return jsonify(attending.get_events_by_lecturer(lecturer_id))
+    return jsonify(attending.get_events_by_lecturer(lecturer_username))
 
 # Get event's details
 @app.route('/api/event-details', methods=['GET'])

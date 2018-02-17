@@ -58,11 +58,11 @@ def get_attendance_for_event(event_uuid):
     return event_attendance_list
 
 
-def get_events_by_lecturer(lecturer_id):
+def get_events_by_lecturer(lecturer_username):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
-    c.execute("SELECT * FROM Events WHERE lecturer_id = ?;", [lecturer_id])
+    c.execute("SELECT * FROM Events WHERE lecturer_username = ?;", [lecturer_username])
     event_lecturer_list = []
     for row in c:
         cur = {
@@ -70,7 +70,7 @@ def get_events_by_lecturer(lecturer_id):
             'room': row[1],
             'datetime_start': row[2],
             'datetime_end': row[3],
-            'lecturer_id': row[4]
+            'lecturer_username': row[4]
         }
         event_lecturer_list.append(cur)
 
@@ -89,7 +89,7 @@ def get_event(event_uuid):
         'room': row[1],
         'datetime_start': row[2],
         'datetime_end': row[3],
-        'lecturer_id': row[4]
+        'lecturer_username': row[4]
     }
     event.append(cur)
     conn.close()
