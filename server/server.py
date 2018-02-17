@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 
 import attending
 import logins
-import validation
+from classes import *
 import database.database_create as db
 
 db.get_usable_db()

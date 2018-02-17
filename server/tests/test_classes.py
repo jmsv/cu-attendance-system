@@ -15,3 +15,7 @@ class TestStudents(unittest.TestCase):
         s = Student(7346348, "what", "what90")
         s_dict = {'name': 'What', 'sid': 7346348, 'username': 'what90'}
         self.assertEqual(s.dict(), s_dict)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -4,5 +4,6 @@ python:
 before_script:
   - cd server
   - pip install -r requirements.txt
+  - pip install pytest
 script:
-  - python -m tests.classes_tests
+  - python -m pytest tests/

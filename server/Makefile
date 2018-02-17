@@ -12,3 +12,6 @@ restart:
 monitor:
 	tail -f cuas-server.log | less
 
+test tests:
+	python -m pytest tests/
+
