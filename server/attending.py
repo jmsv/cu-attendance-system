@@ -76,3 +76,21 @@ def get_events_by_lecturer(lecturer_id):
 
     conn.close()
     return event_lecturer_list
+
+def get_event(event_uuid):
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM Events WHERE event_id = ?;", [event_uuid])
+    event = []
+    row = c.fetchone()
+    cur = {
+        'event_id': row[0],
+        'room': row[1],
+        'datetime_start': row[2],
+        'datetime_end': row[3],
+        'lecturer_id': row[4]
+    }
+    event.append(cur)
+    conn.close()
+    return event

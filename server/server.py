@@ -69,10 +69,26 @@ def student_attendance():
 # Get event's attendance history
 @app.route('/api/event-attendance-history', methods=['GET'])
 def event_attendance():
-    event_uuid = str(request.args.get('event'))
+    event_uuid = request.args.get('event')
     if not event_uuid:
         return jsonify({'error' : 'ValueError: event not found'}),400
     return jsonify(attending.get_attendance_for_event(event_uuid))
+
+# Get lecturer's event history
+@app.route('/api/lecturer-event-history', methods=['GET'])
+def lecturer_events():
+    lecturer_id = request.args.get('lecturer')
+    if not lecturer_id:
+        return jsonify({'error' : 'ValueError: lecturer not found'}),400
+    return jsonify(attending.get_events_by_lecturer(lecturer_id))
+
+# Get event's details
+@app.route('/api/event-details', methods=['GET'])
+def event_details():
+    event_id = request.args.get('lecturer')
+    if not event_id:
+        return jsonify({'error' : 'ValueError: event not found'}),400
+    return jsonify(attending.get_event(event_id))
 
 
 # Lecturer login
