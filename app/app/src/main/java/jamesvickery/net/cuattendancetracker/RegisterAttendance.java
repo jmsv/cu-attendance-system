@@ -52,7 +52,7 @@ public class RegisterAttendance extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody formBody = new FormBody.Builder()
-                .add("user", "666")
+                .add("user", "6666666")
                 .add("event", event_id)
                 .build();
 
