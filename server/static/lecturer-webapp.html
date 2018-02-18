@@ -7,125 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="cuas: Coventry University Attendance System: Lecturer Webapp">
   <meta name="author" content="James Vickery">
-  <link rel="icon" href="static/favicon.ico">
+  <link rel="icon" href="static/img/favicon.ico">
 
   <title>cuas: Lecturer Webapp</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
 
+  <link rel="stylesheet" type="text/css" href="static/lecturer-webapp/lecturer-webapp.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.5.0/feather.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
-  <script>
-    angular.module('cuasApp', [])
-      .controller('CuasController', function() {
-        var cuas = this;
-     
-      });
-</script>
-
-  <style>
-    body {
-      font-size: .875rem;
-    }
-
-    .feather {
-      width: 16px;
-      height: 16px;
-      vertical-align: text-bottom;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 100;
-      /* Behind the navbar */
-      padding: 0;
-      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    }
-
-    .sidebar-sticky {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      height: calc(100vh - 48px);
-      padding-top: calc(.2rem + 48px);
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    .sidebar .nav-link {
-      font-weight: 500;
-      color: #333;
-    }
-
-    .sidebar .nav-link .feather {
-      margin-right: 4px;
-      color: #999;
-    }
-
-    .sidebar .nav-link.active {
-      color: #007bff;
-    }
-
-    .sidebar .nav-link:hover .feather,
-    .sidebar .nav-link.active .feather {
-      color: inherit;
-    }
-
-    .sidebar-heading {
-      font-size: .75rem;
-      text-transform: uppercase;
-    }
-
-    .navbar-brand {
-      padding-top: .5rem;
-      padding-bottom: .75rem;
-      font-size: 1rem;
-      background-color: rgba(0, 0, 0, .25);
-      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-    }
-
-    .navbar .form-control {
-      /* padding: .75rem 1rem; */
-      border-width: 0;
-      border-radius: 0;
-      height: 48px;
-    }
-
-    .form-control-dark {
-      color: #fff;
-      background-color: rgba(255, 255, 255, .1);
-      border-color: rgba(255, 255, 255, .1);
-    }
-
-    .form-control-dark:focus {
-      border-color: transparent;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-    }
-
-    .border-top {
-      border-top: 1px solid #e5e5e5;
-    }
-
-    .border-bottom {
-      border-bottom: 1px solid #e5e5e5;
-    }
-  </style>
+  <!-- Load AngularJS app script -->
+  <script src="static/lecturer-webapp/app.js"></script>
 </head>
 
-<body ng-controller="CuasController as cuas">
+<body>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=".">
-      <img src="static/cuas-logo-white.svg" alt="cuas" height="22">
+      <img src="static/img/cuas-logo-white.svg" alt="cuas" height="20">
     </a>
 
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link" href="">Sign out</a>
       </li>
     </ul>
   </nav>
@@ -136,22 +43,22 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="#!">
                 <i data-feather="home"></i>
                 Dashboard
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#!start">
                 <i data-feather="file"></i>
-                Event History
+                Start lesson
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#!lessons">
                 <i data-feather="circle"></i>
-                Other stuff
+                Lessons
               </a>
             </li>
           </ul>
@@ -159,12 +66,7 @@
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Reports</span>
             <a class="d-flex align-items-center text-muted" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="16"></line>
-                <line x1="8" y1="12" x2="16" y2="12"></line>
-              </svg>
+              <i data-feather="plus-circle"></i>
             </a>
           </h6>
           <ul class="nav flex-column mb-2">
@@ -179,58 +81,16 @@
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
-          class="chartjs-size-monitor">
-          <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+          <div style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
             <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
           </div>
-          <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+          <div style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
           </div>
         </div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button class="btn btn-sm btn-outline-secondary">Share</button>
-              <button class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              This week
-            </button>
-          </div>
-        </div>
 
-        <h2>Section title</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div ng-view></div>
       </main>
     </div>
   </div>
@@ -245,6 +105,9 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+  <script src="static/lecturer-webapp/end-script.js"></script>
+
 </body>
 
 </html>
