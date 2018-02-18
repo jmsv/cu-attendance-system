@@ -1,3 +1,6 @@
+import string
+
+
 def sid(value):
     """
     Get valid Student ID
@@ -42,5 +45,26 @@ def username(value):
     """
     if not isinstance(value, str):
         raise ValueError("Username must be an string")
+
+    return value
+
+
+def room_code(value):
+    """
+    Get valid room code
+    Must be a string, made up exclusively of uppercase letters and numbers
+    :param value: room code
+    :return: valid room code
+    """
+    if not isinstance(value, str):
+        raise ValueError("Username must be an string")
+
+    # Make the value uppercase
+    value = value.upper()
+
+    # Format value to remove any chars except A-Z and 0-9
+    trans = string.maketrans('', '')
+    value_format = trans.translate(trans, string.uppercase + string.digits)
+    value = value.translate(trans, value_format)
 
     return value

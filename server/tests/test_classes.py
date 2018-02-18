@@ -17,5 +17,20 @@ class TestStudents(unittest.TestCase):
         self.assertEqual(s.dict(), s_dict)
 
 
+class TestRooms(unittest.TestCase):
+    def test_building(self):
+        r = Room("ECG24")
+        self.assertEqual(r.building, "Engineering & Computing Building")
+
+    def test_unknown(self):
+        r = Room("OOPS99")
+        self.assertEqual(r.building, "Unknown building")
+
+    def test_weird_room_code(self):
+        r = Room("e cg - 24")
+        self.assertEqual(r.code, "ECG24")
+        self.assertEqual(r.building, "Engineering & Computing Building")
+
+
 if __name__ == '__main__':
     unittest.main()

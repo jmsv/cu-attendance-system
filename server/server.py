@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
 
 import attending
-import logins
-from classes import *
 import database.database_create as db
+import logins
 
 db.get_usable_db()
 
@@ -52,7 +51,7 @@ def attend():
     student_id = request.form['user']
     event_uuid = request.form['event']
     if not student_id or not event_uuid:
-        return jsonify({'error' : 'ValueError: SID or Event_id not found'}),400
+        return jsonify({'error': 'ValueError: SID or Event_id not found'}), 400
     return jsonify({'ok': attending.register_student_attendance(student_id, event_uuid)})
 
 
@@ -61,7 +60,7 @@ def attend():
 def student_attendance():
     student_id = request.args.get('user')
     if not student_id:
-        return jsonify({'error' : 'ValueError: SID not found'}),400
+        return jsonify({'error': 'ValueError: SID not found'}), 400
     return jsonify(attending.get_student_attendance(student_id))
 
 
@@ -70,23 +69,26 @@ def student_attendance():
 def event_attendance():
     event_uuid = request.args.get('event')
     if not event_uuid:
-        return jsonify({'error' : 'ValueError: Event not found'}),400
+        return jsonify({'error': 'ValueError: Event not found'}), 400
     return jsonify(attending.get_attendance_for_event(event_uuid))
 
+
 # Get lecturer's event history
+# TODO: Methods like this need to be authenticated (lecturer can only get this info with valid login session)
 @app.route('/api/lecturer-event-history', methods=['GET'])
 def lecturer_events():
     lecturer_username = request.args.get('lecturer')
     if not lecturer_username:
-        return jsonify({'error' : 'ValueError: Lecturer not found'}),400
+        return jsonify({'error': 'ValueError: Lecturer not found'}), 400
     return jsonify(attending.get_events_by_lecturer(lecturer_username))
+
 
 # Get event's details
 @app.route('/api/event-details', methods=['GET'])
 def event_details():
     event_id = request.args.get('lecturer')
     if not event_id:
-        return jsonify({'error' : 'ValueError: Event not found'}),400
+        return jsonify({'error': 'ValueError: Event not found'}), 400
     return jsonify(attending.get_event(event_id))
 
 
