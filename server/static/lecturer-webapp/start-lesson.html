@@ -1,14 +1,20 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Start a lesson</h1>
+</div>
+
 <div class="row">
   <div class="col-md-12" style="max-width:800px">
 
-    <h4 class="mb-3">Start a lesson</h4>
+    <!-- <div class="alert alert-danger" role="alert">
+      <strong>Error: </strong>Put error message here
+    </div> -->
 
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="firstName">Room</label>
         <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
         <div class="invalid-feedback">
-          Valid first name is required.
+          Valid room is required.
         </div>
       </div>
       <div class="col-md-6 mb-3">
@@ -21,16 +27,25 @@
       <div class="col-md-6 mb-3">
         <label for="example-date-input">Date</label>
         <input type="date" class="form-control" value="2011-08-19" id="example-date-input">
+        <div class="invalid-feedback">
+          Valid date is required.
+        </div>
       </div>
 
       <div class="col-md-3 mb-3">
         <label for="startTime">Start</label>
         <input type="time" class="form-control" value="13:00" id="startTime">
+        <div class="invalid-feedback">
+          Valid time is required.
+        </div>
       </div>
 
       <div class="col-md-3 mb-3">
         <label for="endTime">End</label>
         <input type="time" class="form-control" value="15:00" id="endTime">
+        <div class="invalid-feedback">
+          Valid time is required.
+        </div>
       </div>
     </div>
 

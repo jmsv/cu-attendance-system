@@ -68,3 +68,12 @@ def room_code(value):
     value = value.translate(trans, value_format)
 
     return value
+
+
+def session_id_is_valid(session_id):
+    print session_id
+    if not session_id:
+        return False
+    if len(session_id) != 16:
+        return False
+    return True

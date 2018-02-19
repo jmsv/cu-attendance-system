@@ -107,6 +107,13 @@ def lecturer_login():
     return key
 
 
+# Check login session is valid
+@app.route('/api/session-check', methods=['GET'])
+def session_check():
+    session_id = request.args.get('session')
+    return jsonify({'valid': logins.session_check(session_id)})
+
+
 # Run server for testing
 if __name__ == "__main__":
     app.config.update(

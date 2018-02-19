@@ -3,7 +3,7 @@ import validation as valid
 buildings = (
     ["AB", "Alan Berry", ()],
     ["AS", "Armstrong Siddely", ()],
-    ["CUSC", "Coventry University Sports Ventre", ()],
+    ["CUSC", "Coventry University Sports Centre", ()],
     ["CW", "Charles Ward", ()],
     ["EC", "Engineering & Computing Building", ("52.405219", "-1.499655")],
     ["ET", "Ellen Terry", ()],

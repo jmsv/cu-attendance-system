@@ -3,6 +3,7 @@ import uuid
 import hashlib
 from datetime import datetime, timedelta
 import database.logins_db as db
+import validation
 
 db_path = 'database/database.db'
 
@@ -26,3 +27,10 @@ def lecturer_login(username, password):
     conn.close()
 
     return session_key
+
+
+def session_check(session_id):
+    if not validation.session_id_is_valid(session_id):
+        return False
+    # TODO: Check session is in database
+    return True
