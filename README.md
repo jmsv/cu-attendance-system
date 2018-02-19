@@ -3,8 +3,12 @@
 
 [![Travis CI](https://travis-ci.com/jamesevickery/cu-attendance-system.svg?token=hXPPRPSZqxVqUVQf6s8p&branch=master)](https://travis-ci.com/jamesevickery/cu-attendance-system#)
 
-> __Coventry University Attendance Tracker is an app that will help with attendance monitoring.__
-> Students often forget their student cards, meaning they can't sign in to university lectures. Our proposed system provides an alternative method of signing in using their phone's camera for reading QR codes.
+---
+
+> __Coventry University Attendance System (cuas) is an alternative attendance management system.__
+> Students often forget their student cards, meaning they can't sign in to university lectures. Our proposed system provides an alternative/additional method of signing in using the students' phone cameras for reading QR codes, via the Tracker app. A webapp can also be used by lecturers for monitoring attendance.
+
+---
 
 ## Getting Started
 
@@ -26,7 +30,7 @@ You also need Python's `virtualenv` package. Install (in an admin Command Prompt
 python -m pip install virtualenv
 ```
 
-### Running the server
+### Running the Server
 
 You've got Python set up and you can run it from a command line? It's all rainbows and blue skies from here. This bit assumes you're already in the directory you've cloned the repo to. On my Windows PC, it's this: `C:\Users\James\gitr\cu-attendance-system`.
 
@@ -70,4 +74,20 @@ To test, open to a browser and go to http://localhost:5000/api/hello. If you've 
 
 As you make changes to `server.py` or any of the module files, it should automatically restart, applying the changes. Updating stuff on the site often requires a <kbd>Ctrl+F5</kbd> (hard refresh) in the browser.
 
-_Enjoy, love James x_
+### Resetting the Database
+
+What was that? You fucked up the database? You fool. Fortunately I do this too tbh and made a script to reset it.
+
+From the `server` directory, run this:
+
+```sh
+python database/database_create.py
+```
+
+This just drops all the tables and recreates them and adds a bit of example data.
+
+### Running the Android App
+
+To run the Android app, install [Android Studio](https://developer.android.com/studio/index.html). Start Android Studio, and open the `cu-attendance-system/app` project. As the project loads, it prompts you to install all the necassary components.
+
+Build the project, and then run on an emulator or a physical Android device via adb. To run on a physical device, you must first [enable USB debugging](https://developer.android.com/studio/debug/dev-options.html) in the device's settings.
