@@ -61,10 +61,17 @@ body {
 }
 
 .navbar .form-control {
-  /* padding: .75rem 1rem; */
   border-width: 0;
   border-radius: 0;
   height: 48px;
+}
+
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
 }
 
 .form-control-dark {
