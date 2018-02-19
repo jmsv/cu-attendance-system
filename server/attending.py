@@ -98,9 +98,25 @@ def get_event(event_uuid):
     return event
 
 
-def create_event(room, date, time):
-    #conn = sqlite3.connect('Attendance
-    #eventid output to dbase event table 
-    a = str(uuid.uuid4()).replace('-','')[:16]
-    
-    return a
+def create_event(room, start, end, lecturer):
+    event_id = str(uuid.uuid4()).replace('-','')[:16]
+
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    start_str = start.strftime("%Y-%m-%d %H:%M:%S")
+    end_str = end.strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        c.execute("INSERT INTO Events VALUES(?, ?, ?, ?, ?);",
+                  [event_id, room, start_str, end_str, lecturer])
+    except sqlite3.OperationalError:
+        return False
+
+    conn.commit()
+    conn.close()
+
+    return event_id
+
+start = datetime.datetime(2018, 2, 19, 16, 0)
+end = datetime.datetime(2018, 2, 19, 18, 0)
+print (create_event("ECG24", start, end, "dr777"))
