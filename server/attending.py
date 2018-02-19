@@ -1,5 +1,6 @@
 import datetime
 import sqlite3
+import uuid
 
 db_path = 'database/database.db'
 
@@ -77,6 +78,7 @@ def get_events_by_lecturer(lecturer_username):
     conn.close()
     return event_lecturer_list
 
+
 def get_event(event_uuid):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -94,3 +96,11 @@ def get_event(event_uuid):
     event.append(cur)
     conn.close()
     return event
+
+
+def create_event(room, date, time):
+    #conn = sqlite3.connect('Attendance
+    #eventid output to dbase event table 
+    a = str(uuid.uuid4()).replace('-','')[:16]
+    
+    return a

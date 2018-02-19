@@ -34,11 +34,4 @@ def session_check(session_id):
         return False
     # TODO: Check session is in database
     return True
-
-def randomstr(room, date, time):
-    #conn = sqlite3.connect('Attendance
-    #eventid output to dbase event table 
-    a = str(uuid.uuid4()).replace('-','')[:16]
-
-    return a
-    #print(randomstr("","",""))
+    
