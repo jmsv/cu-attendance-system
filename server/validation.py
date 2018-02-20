@@ -86,6 +86,6 @@ def session_id_is_valid(session_id):
     print session_id
     if not session_id:
         return False
-    if len(session_id) != 16:
+    if len(session_id) != 32:
         return False
     return True

@@ -32,6 +32,13 @@ def lecturer_login(username, password):
 def session_check(session_id):
     if not validation.session_id_is_valid(session_id):
         return False
-    # TODO: Check session is in database
+
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    c.execute("SELECT lecturer_username, expires FROM LecturerLoginSessions WHERE session_id = ?;", (session_id,))
+    result = c.fetchone()
+    if not result:
+        return False
+    # TODO: If expiry datetime precedes current datetime, return False
+    conn.close()
     return True
-    

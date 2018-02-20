@@ -119,20 +119,19 @@ def lecturer_login():
     try:
         key = logins.lecturer_login(username, password)
     except ValueError:
-        return Response("Password incorrect", 401)
+        return Response("Password incorrect", 401).send()
     except:
-        return Response("Server error", 500)
+        return Response("Server error", 500).send()
     # TODO: Return in JSON format - requires front-end (login) change
     return key
 
 
 # Check login session is valid
-@app.route('/api/session-check', methods=['GET'])
+@app.route('/api/lecturer-session-check', methods=['GET'])
 def session_check():
     session_id = request.args.get('session')
-    # TODO: Check valid login session
     result = {
-        'valid': logins.session_check(session_id)
+        'logged_in': logins.session_check(session_id)
     }
     return Response(result).send()
 
