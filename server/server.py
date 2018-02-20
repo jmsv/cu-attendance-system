@@ -1,8 +1,10 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory
 
 import attending
 import database.database_create as db
 import logins
+import validation
+from response import Response
 
 db.get_usable_db()
 
@@ -42,7 +44,7 @@ def get_assets(path):
 # Test endpoint for checking server is working
 @app.route('/api/hello')
 def hello():
-    return "hello"
+    return 'hello'
 
 
 # Endpoint called when student signs into their class
@@ -51,17 +53,30 @@ def attend():
     student_id = request.form['user']
     event_uuid = request.form['event']
     if not student_id or not event_uuid:
-        return jsonify({'error': 'ValueError: SID or Event_id not found'}), 400
-    return jsonify({'ok': attending.register_student_attendance(student_id, event_uuid)})
+        return Response('ValueError: SID or Event_id not found', 400)
+
+    try:
+        result, status = attending.register_student_attendance(student_id, event_uuid)
+    except:
+        result = {
+            'message': 'A server error occurred'
+        }
+        status = 500
+
+    return Response(result, status).send()
 
 
 # Get student's attendance history
 @app.route('/api/student-attendance-history', methods=['GET'])
 def student_attendance():
-    student_id = request.args.get('user')
-    if not student_id:
-        return jsonify({'error': 'ValueError: SID not found'}), 400
-    return jsonify(attending.get_student_attendance(student_id))
+    student_id = request.args.get('sid')
+
+    try:
+        student_id = validation.sid(student_id)
+    except ValueError:
+        return Response("Invalid Student ID", 400).send()
+
+    return Response(attending.get_student_attendance(student_id)).send()
 
 
 # Get event's attendance history
@@ -69,27 +84,31 @@ def student_attendance():
 def event_attendance():
     event_uuid = request.args.get('event')
     if not event_uuid:
-        return jsonify({'error': 'ValueError: Event not found'}), 400
-    return jsonify(attending.get_attendance_for_event(event_uuid))
+        return Response("Invalid event ID", 400).send()
+    return Response(attending.get_attendance_for_event(event_uuid)).send()
 
 
 # Get lecturer's event history
 # TODO: Methods like this need to be authenticated (lecturer can only get this info with valid login session)
 @app.route('/api/lecturer-event-history', methods=['GET'])
 def lecturer_events():
-    lecturer_username = request.args.get('lecturer')
+    lecturer_username = request.args.get('username')
     if not lecturer_username:
-        return jsonify({'error': 'ValueError: Lecturer not found'}), 400
-    return jsonify(attending.get_events_by_lecturer(lecturer_username))
+        return Response("Invalid lecturer username", 400).send()
+    return Response(attending.get_events_by_lecturer(lecturer_username)).send()
 
 
 # Get event's details
 @app.route('/api/event-details', methods=['GET'])
 def event_details():
-    event_id = request.args.get('lecturer')
+    event_id = request.args.get('id')
     if not event_id:
-        return jsonify({'error': 'ValueError: Event not found'}), 400
-    return jsonify(attending.get_event(event_id))
+        return Response("Invalid event ID", 400).send()
+    try:
+        event = attending.get_event(event_id)
+    except:
+        return Response("No such event", 404)
+    return Response(event)
 
 
 # Lecturer login
@@ -100,10 +119,10 @@ def lecturer_login():
     try:
         key = logins.lecturer_login(username, password)
     except ValueError:
-        return jsonify({'Error': 'Password incorrect'}, 403)
-    except Exception as e:
-        print e
-        return jsonify({'Error': 'Internal Server Error'}, 500)
+        return Response("Password incorrect", 401)
+    except:
+        return Response("Server error", 500)
+    # TODO: Return in JSON format - requires front-end (login) change
     return key
 
 
@@ -111,10 +130,14 @@ def lecturer_login():
 @app.route('/api/session-check', methods=['GET'])
 def session_check():
     session_id = request.args.get('session')
-    return jsonify({'valid': logins.session_check(session_id)})
+    # TODO: Check valid login session
+    result = {
+        'valid': logins.session_check(session_id)
+    }
+    return Response(result).send()
 
 
-# Run server for testing
+# Run server in debug mode, and auto restart on file change
 if __name__ == "__main__":
     app.config.update(
         DEBUG=True,

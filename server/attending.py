@@ -1,13 +1,29 @@
 import datetime
 import sqlite3
 import uuid
+import validation
 
 db_path = 'database/database.db'
+
 
 # attendance table functions
 
 
 def register_student_attendance(student_id, event_uuid):
+    try:
+        student_id = validation.sid(student_id)
+    except ValueError:
+        return {
+            'message': 'Invalid student ID'
+        }, 400
+
+    try:
+        event_uuid = validation.event_id(event_uuid)
+    except ValueError:
+        return {
+            'message': 'Invalid event ID'
+        }, 400
+
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
@@ -15,12 +31,16 @@ def register_student_attendance(student_id, event_uuid):
     arrival = arrival.strftime("%Y-%m-%d %H:%M:%S")
     try:
         c.execute("INSERT INTO Attendance VALUES(?, ?, ?);", [student_id, arrival, event_uuid])
-    except sqlite3.OperationalError:
-        return False
+    except sqlite3.IntegrityError:
+        return {
+            'message': 'Already signed in'
+        }, 200
 
     conn.commit()
     conn.close()
-    return True
+    return {
+        'message': 'Successfully signed in'
+    }, 200
 
 
 def get_student_attendance(student_id):
@@ -84,22 +104,20 @@ def get_event(event_uuid):
     c = conn.cursor()
 
     c.execute("SELECT * FROM Events WHERE event_id = ?;", [event_uuid])
-    event = []
     row = c.fetchone()
-    cur = {
+    event = {
         'event_id': row[0],
         'room': row[1],
         'datetime_start': row[2],
         'datetime_end': row[3],
         'lecturer_username': row[4]
     }
-    event.append(cur)
     conn.close()
     return event
 
 
 def create_event(room, start, end, lecturer):
-    event_id = str(uuid.uuid4()).replace('-','')[:16]
+    event_id = str(uuid.uuid4()).replace('-', '')[:16]
 
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -116,6 +134,7 @@ def create_event(room, start, end, lecturer):
     conn.close()
 
     return event_id
+
 
 start = datetime.datetime(2018, 2, 19, 16, 0)
 end = datetime.datetime(2018, 2, 19, 18, 0)

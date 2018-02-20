@@ -70,6 +70,18 @@ def room_code(value):
     return value
 
 
+def event_id(value):
+    """
+    Event ID must be 16 chars long, string
+    :param value: event id
+    :return: valid event id
+    """
+    value = str(value)
+    if len(value) is not 16:
+        raise ValueError("Event ID must be 16 characters long")
+    return value
+
+
 def session_id_is_valid(session_id):
     print session_id
     if not session_id:
