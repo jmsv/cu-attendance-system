@@ -1,12 +1,20 @@
 # cu-attendance-system
-206CDE - Real World Project - 1718JANMAY
+206CDE - Real World Project - 1718JANMAY - Presentation: 2018-03-05 12:00
 
 [![Travis CI](https://travis-ci.com/jamesevickery/cu-attendance-system.svg?token=hXPPRPSZqxVqUVQf6s8p&branch=master)](https://travis-ci.com/jamesevickery/cu-attendance-system#)
+[![Discord](https://img.shields.io/discord/405022428905996288.svg)](https://discordapp.com/channels/405022428905996288/405022428905996290)
 
----
 
 > __Coventry University Attendance System (cuas) is an alternative attendance management system.__
 > Students often forget their student cards, meaning they can't sign in to university lectures. Our proposed system provides an alternative/additional method of signing in using the students' phone cameras for reading QR codes, via the Tracker app. A webapp can also be used by lecturers for monitoring attendance.
+
+---
+
+## Links
+
+- [Google Slides presentation](https://docs.google.com/presentation/d/1FJRiusDUBAOPlAZsN0xIQXuhGP8kQTZpb0YXy6KX1Ec/edit?usp=sharing)
+- [Trello](https://trello.com/invite/b/t01Y0sO0/ff42bf7f4e8d08d8d0b28925fed4be98/206cde-8b)
+- [Colour scheme](https://material.io/color/#!/?primary.color=007bff&secondary.color=6c757d)
 
 ---
 
