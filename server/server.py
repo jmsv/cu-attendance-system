@@ -24,13 +24,13 @@ def site_splash():
 
 
 # Lecturer login
-@app.route('/lecturer-login')
+@app.route('/lecturer/login')
 def site_lecturer_login():
     return render_template('lecturer-login.html')
 
 
 # Lecturer webapp
-@app.route('/lecturer-webapp')
+@app.route('/lecturer')
 def site_lecturer_webapp():
     return render_template('lecturer-webapp.html')
 

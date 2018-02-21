@@ -45,22 +45,19 @@ def create_tables():
 def init_lecturers():
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-
     lecturers = [
         {
             'username': 'dr777',
             'name': 'Dennis Richie',
-            'password': 'avocado on toast'
+            'password': 'what lmao'
         }
     ]
-
     for l in lecturers:
         try:
             c.execute("INSERT INTO Lecturer VALUES (?, ?, ?);",
                       [l['username'], l['name'], hashlib.sha512(l['password']).hexdigest()])
         except sqlite3.IntegrityError as e:
             print("init_lecturers:\t%s" % str(e))
-
     conn.commit()
     conn.close()
 
