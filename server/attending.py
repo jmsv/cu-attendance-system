@@ -134,8 +134,3 @@ def create_event(room, start, end, lecturer):
     conn.close()
 
     return event_id
-
-
-start = datetime.datetime(2018, 2, 19, 16, 0)
-end = datetime.datetime(2018, 2, 19, 18, 0)
-print (create_event("ECG24", start, end, "dr777"))

@@ -5,6 +5,7 @@ import database.database_create as db
 import logins
 import validation
 from response import Response
+import datetime
 
 db.get_usable_db()
 
@@ -132,6 +133,32 @@ def session_check():
     session_id = request.args.get('session')
     result = {
         'logged_in': logins.session_check(session_id)
+    }
+    return Response(result).send()
+
+
+# Start lesson by creating event
+@app.route('/api/start-lesson', methods=['POST'])
+def start_lesson():
+    lecturer_username = request.form['username']
+    room = request.form['room']
+    start_str = request.form['start']
+    end_str = request.form['end']
+
+    if not (lecturer_username and room and start_str and end_str):
+        return Response("Parameters missing", 400).send()
+    try:
+        start = datetime.datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+        end = datetime.datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
+    except:
+        return Response("Invalid datetime", 400).send()
+    try:
+        event_id = attending.create_event(room, start, end, lecturer_username)
+    except:
+        return Response("Can't create new event", 500).send()
+
+    result = {
+        'event_id': event_id
     }
     return Response(result).send()
 
