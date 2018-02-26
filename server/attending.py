@@ -134,3 +134,23 @@ def create_event(room, start, end, lecturer):
     conn.close()
 
     return event_id
+
+def student_was_late(event_id, arrival_time):
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM Events WHERE event_id = ?;", [event_id])
+    row = c.fetchone()
+    start_time = datetime.datetime.strptime(row[2], "%Y-%m-%d %H:%M:%S")
+    late_time = start_time + datetime.timedelta(minutes=15)
+    arrival_time = datetime.datetime.strptime(arrival_time, "%Y-%m-%d %H:%M:%S")
+    if arrival_time > late_time:
+        return True
+    return False
+
+
+
+
+
+    
+    
