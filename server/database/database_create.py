@@ -55,7 +55,7 @@ def init_lecturers():
     for l in lecturers:
         try:
             c.execute("INSERT INTO Lecturer VALUES (?, ?, ?);",
-                      [l['username'], l['name'], hashlib.sha512(l['password']).hexdigest()])
+                      [l['username'], l['name'], hashlib.sha512(l['password'].encode('utf-8')).hexdigest()])
         except sqlite3.IntegrityError as e:
             print("init_lecturers:\t%s" % str(e))
     conn.commit()

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import string
 
 
@@ -83,7 +84,7 @@ def event_id(value):
 
 
 def session_id_is_valid(session_id):
-    print session_id
+    print(session_id)
     if not session_id:
         return False
     if len(session_id) != 32:
