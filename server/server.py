@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Flask, request, render_template, send_from_directory
 
 import attending
@@ -5,7 +7,6 @@ import database.database_create as db
 import logins
 import validation
 from response import Response
-import datetime
 
 db.get_usable_db()
 
@@ -108,7 +109,7 @@ def event_details():
     try:
         event = attending.get_event(event_id)
     except:
-        return Response("No such event", 404)
+        return Response("No such event", 404).send()
     return Response(event)
 
 
