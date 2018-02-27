@@ -1,5 +1,4 @@
 from __future__ import print_function
-import string
 
 
 def sid(value):
@@ -9,7 +8,7 @@ def sid(value):
     :param value: sid
     :return: valid sid
     """
-    if not value: raise ValueError("No student ID")
+    if not value: raise ValueError("sid (Student ID) not specified")
 
     if not isinstance(value, int):
         try:
@@ -65,10 +64,12 @@ def room_code(value):
     # Make the value uppercase
     value = value.upper()
 
-    # Format value to remove any chars except A-Z and 0-9
-    trans = string.maketrans('', '')
-    value_format = trans.translate(trans, string.uppercase + string.digits)
-    value = value.translate(trans, value_format)
+    allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    filtered = ''
+    for char in value:
+        if char in allowed:
+            filtered += char
+    value = filtered
 
     return value
 
