@@ -2,87 +2,87 @@
   <h1 class="h2">Start a lesson</h1>
 </div>
 
-<div class="row">
-  <div class="col-md-12" style="max-width:800px">
+<div class="col-md-12" style="max-width:800px" ng-controller="StartLessonController">
 
-    <!-- <div class="alert alert-danger" role="alert">
+  <!-- <div class="alert alert-danger" role="alert">
       <strong>Error: </strong>Put error message here
     </div> -->
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="firstName">Room</label>
-        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-        <div class="invalid-feedback">
-          Valid room is required.
-        </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="firstName">Room</label>
+      <input type="text" class="form-control" id="firstName" ng-model="room.code">
+      <div class="invalid-feedback">
+        Valid room is required.
       </div>
-      <div class="col-md-6 mb-3">
-        <label for="buildingName">Building</label>
-        <input type="text" class="form-control" id="buildingName" placeholder="" value="">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="buildingName">Building</label>
+      <input type="text" class="form-control" id="buildingName" ng-model="room.building">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6 mb-3">
+      <label for="example-date-input">Date</label>
+      <input type="date" class="form-control" id="event-date" ng-model="event.date">
+      <div class="invalid-feedback">
+        Valid date is required.
       </div>
     </div>
 
-    <div class="row mb-2">
-      <div class="col-md-6 mb-3">
-        <label for="example-date-input">Date</label>
-        <input type="date" class="form-control" value="2011-08-19" id="example-date-input">
-        <div class="invalid-feedback">
-          Valid date is required.
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-3">
-        <label for="startTime">Start</label>
-        <input type="time" class="form-control" value="13:00" id="startTime">
-        <div class="invalid-feedback">
-          Valid time is required.
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-3">
-        <label for="endTime">End</label>
-        <input type="time" class="form-control" value="15:00" id="endTime">
-        <div class="invalid-feedback">
-          Valid time is required.
-        </div>
+    <div class="col-md-3 mb-3">
+      <label for="startTime">Start</label>
+      <input type="time" class="form-control" id="startTime" value="09:00">
+      <div class="invalid-feedback">
+        Valid time is required.
       </div>
     </div>
 
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Generate sign-in code</button>
+    <div class="col-md-3 mb-3">
+      <label for="endTime">End</label>
+      <input type="time" class="form-control" value="11:00" id="endTime">
+      <div class="invalid-feedback">
+        Valid time is required.
+      </div>
+    </div>
+  </div>
 
-    <hr class="mb-4">
-    <h4 class="mb-3">Sign-in QR code</h4>
+  <div id="start-map" class="google-maps mb-4 collapse"></div>
 
-    <a href="">
-      <div class="card mb-4" data-toggle="modal" data-target="#qrModal">
-        <div class="card-body">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-6AP1h8zW4FWlT7ksMx_KPfPMwjVji8&callback=myMap"></script>
+
+  <button class="btn btn-primary btn-lg btn-block" type="submit">Generate sign-in code</button>
+
+  <hr class="mb-4">
+  <h4 class="mb-3">Sign-in QR code</h4>
+
+  <a href="">
+    <div class="card mb-4" data-toggle="modal" data-target="#qrModal">
+      <div class="card-body">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data=dashboardtest123" width="100%" />
+      </div>
+    </div>
+  </a>
+
+  <!-- Modal for QR -->
+  <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrModalTitle">Sign-in QR code</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
           <img src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data=dashboardtest123" width="100%" />
         </div>
-      </div>
-    </a>
-
-    <!-- Modal for QR -->
-    <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="qrModalTitle">Sign-in QR code</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data=dashboardtest123" width="100%" />
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
-
-
   </div>
 
 </div>

@@ -7,6 +7,7 @@ import database.database_create as db
 import logins
 import validation
 from response import Response
+from classes import *
 
 db.get_usable_db()
 
@@ -173,6 +174,17 @@ def start_lesson():
         'event_id': event_id
     }
     return Response(result).send()
+
+
+# Check login session is valid
+@app.route('/api/get-room', methods=['GET'])
+def get_room():
+    room_code = request.args.get('room')
+    try:
+        room = Room(room_code)
+    except:
+        return Response("Can't get room info")
+    return Response(room.dict()).send()
 
 
 # Run server in debug mode, and auto restart on file change
