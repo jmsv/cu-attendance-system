@@ -6,8 +6,8 @@ import attending
 import database.database_create as db
 import logins
 import validation
-from response import Response
 from classes import *
+from response import Response
 
 db.get_usable_db()
 
@@ -115,7 +115,7 @@ def event_details():
         event = attending.get_event(event_id)
     except:
         return Response("No such event", 404).send()
-    return Response(event)
+    return Response(event).send()
 
 
 # Lecturer login
@@ -182,8 +182,8 @@ def get_room():
     room_code = request.args.get('room')
     try:
         room = Room(room_code)
-    except:
-        return Response("Can't get room info")
+    except Exception as e:
+        return Response({"message": "Can't get room info", "details": str(e)}).send()
     return Response(room.dict()).send()
 
 

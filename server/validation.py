@@ -46,7 +46,10 @@ def username(value):
     :return: valid username
     """
     if not isinstance(value, str):
-        raise ValueError("Username must be an string")
+        try:
+            value = value.encode('ascii', 'ignore')
+        except:
+            raise ValueError("Username must be a string, not %s" % type(value))
 
     return value
 
@@ -59,7 +62,10 @@ def room_code(value):
     :return: valid room code
     """
     if not isinstance(value, str):
-        raise ValueError("Username must be an string")
+        try:
+            value = value.encode('ascii', 'ignore')
+        except:
+            raise ValueError("Room code must be a string, not %s" % type(value))
 
     # Make the value uppercase
     value = value.upper()
