@@ -72,6 +72,10 @@ def attend():
 @app.route('/api/student-attendance-history', methods=['GET'])
 def student_attendance():
     student_id = request.args.get('sid')
+    try:
+        student_id = validation.sid(student_id)
+    except ValueError:
+        return Response("No valid student ID (sid)", 400).send()
 
     try:
         student_id = validation.sid(student_id)
@@ -125,7 +129,10 @@ def lecturer_login():
     except:
         return Response("Server error", 500).send()
     # TODO: Return in JSON format - requires front-end (login) change
-    return key
+
+    return Response({
+        'session': key
+    }).send()
 
 
 # Check login session is valid
@@ -141,15 +148,15 @@ def session_check():
 # Start lesson by creating event
 @app.route('/api/start-lesson', methods=['POST'])
 def start_lesson():
-    #Requests data for lectrurer username, room, start and end
-    #then stores it for later use
+    # Requests data for lectrurer username, room, start and end
+    # then stores it for later use
     lecturer_username = request.form['username']
     room = request.form['room']
     start_str = request.form['start']
     end_str = request.form['end']
 
-    #if any of the values are not consistent with what is stored, then a response
-    #is returned saying "parameters are missing" and an error code 400 is returned.
+    # If any of the values are not consistent with what is stored, then a response
+    # is returned saying "parameters are missing" and an error code 400 is returned.
     if not (lecturer_username and room and start_str and end_str):
         return Response("Parameters missing", 400).send()
     try:

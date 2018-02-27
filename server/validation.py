@@ -9,6 +9,8 @@ def sid(value):
     :param value: sid
     :return: valid sid
     """
+    if not value: raise ValueError("No student ID")
+
     if not isinstance(value, int):
         try:
             value = int(value)

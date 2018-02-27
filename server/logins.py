@@ -10,7 +10,7 @@ db_path = 'database/database.db'
 
 def lecturer_login(username, password):
     lecturer = db.get_lecturer_by_id(username)
-    password_hash = hashlib.sha512(password).hexdigest()
+    password_hash = hashlib.sha512(password.encode('utf-8')).hexdigest()
     if lecturer['password_hash'] != password_hash:
         raise ValueError("Wrong password")
 

@@ -93,6 +93,11 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script>
+
+    function showError() {
+      document.getElementById("error-bar").classList.remove('collapse');
+    }
+
     $('#login-form').submit(function () {
 
       var username = document.getElementById("inputUsername").value;
@@ -102,13 +107,18 @@
           username: username,
           password: password
         })
-        .done(function (data) {
-          document.getElementById("error-bar").classList.add('collapse');
-          document.cookie = "cuas_lecturer_login_session=" + data;
-          window.location.replace("../lecturer");
+        .done(function (res) {
+          if (res.error) {
+            showError();
+            console.log(res);
+          } else {
+            document.getElementById("error-bar").classList.add('collapse');
+            document.cookie = "cuas_lecturer_login_session=" + res.data.session;
+            window.location.replace("../lecturer");
+          }
         })
         .fail(function () {
-          document.getElementById("error-bar").classList.remove('collapse');
+          showError();
         });
     });
   </script>
