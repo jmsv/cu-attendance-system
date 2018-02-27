@@ -5,6 +5,13 @@ import sqlite3
 dir_path = os.path.dirname(os.path.realpath(__file__))
 db_path = dir_path + '/database.db'
 
+verbose = False
+
+
+def v_print(text):
+    if verbose:
+        print(text)
+
 
 def drop_tables():
     conn = sqlite3.connect(db_path)
@@ -18,7 +25,7 @@ def drop_tables():
         try:
             c.execute(drop)
         except sqlite3.OperationalError as e:
-            print("drop_tables:\t%s" % str(e))
+            v_print("drop_tables:\t%s" % str(e))
 
     conn.commit()
     conn.close()
@@ -28,36 +35,48 @@ def create_tables():
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
-    create_tables_sql = open(dir_path + "/sql/create-tables.sql", "r")
-    creates = create_tables_sql.read().split('\n\n\n')
-    create_tables_sql.close()
+    with open(dir_path + "/sql/create-tables.sql", "r") as file:
+        sql = file.read()
 
-    for create in creates:
-        try:
-            c.execute(create)
-        except sqlite3.OperationalError as e:
-            print("create_tables:\t%s" % str(e))
+    try:
+        c.executescript(sql)
+    except sqlite3.OperationalError as e:
+        v_print("create_tables: " + str(e))
 
     conn.commit()
     conn.close()
 
 
 def init_lecturers():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
     lecturers = [
-        {
-            'username': 'dr777',
-            'name': 'Dennis Richie',
-            'password': 'what lmao'
-        }
+        ['dr777', 'Dennis Richie', 'what lmao'],
+        ['al010', 'Ada Lovelace', 'program'],
     ]
     for l in lecturers:
-        try:
-            c.execute("INSERT INTO Lecturer VALUES (?, ?, ?);",
-                      [l['username'], l['name'], hashlib.sha512(l['password'].encode('utf-8')).hexdigest()])
-        except sqlite3.IntegrityError as e:
-            print("init_lecturers:\t%s" % str(e))
+        l[2] = hashlib.sha512(l[2].encode('utf-8')).hexdigest()
+
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    try:
+        c.executemany("INSERT INTO Lecturer VALUES (?, ?, ?);", lecturers)
+    except sqlite3.IntegrityError as e:
+        v_print("init_lecturers:\t%s" % str(e))
+    conn.commit()
+    conn.close()
+
+
+def example_data():
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    with open(dir_path + "/sql/example-data.sql", "r") as file:
+        sql = file.read()
+
+    try:
+        c.executescript(sql)
+    except sqlite3.IntegrityError as e:
+        v_print("example_data: " + str(e))
+
     conn.commit()
     conn.close()
 
@@ -65,6 +84,7 @@ def init_lecturers():
 def get_usable_db():
     create_tables()
     init_lecturers()
+    example_data()
 
 
 def reset_db():

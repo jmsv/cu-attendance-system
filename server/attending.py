@@ -14,15 +14,15 @@ def register_student_attendance(student_id, event_uuid):
         student_id = validation.sid(student_id)
     except ValueError:
         return {
-            'message': 'Invalid student ID'
-        }, 400
+                   'message': 'Invalid student ID'
+               }, 400
 
     try:
         event_uuid = validation.event_id(event_uuid)
     except ValueError:
         return {
-            'message': 'Invalid event ID'
-        }, 400
+                   'message': 'Invalid event ID'
+               }, 400
 
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -33,14 +33,14 @@ def register_student_attendance(student_id, event_uuid):
         c.execute("INSERT INTO Attendance VALUES(?, ?, ?);", [student_id, arrival, event_uuid])
     except sqlite3.IntegrityError:
         return {
-            'message': 'Already signed in'
-        }, 200
+                   'message': 'Already signed in'
+               }, 200
 
     conn.commit()
     conn.close()
     return {
-        'message': 'Successfully signed in'
-    }, 200
+               'message': 'Successfully signed in'
+           }, 200
 
 
 def get_student_attendance(student_id):
@@ -135,6 +135,7 @@ def create_event(room, start, end, lecturer):
 
     return event_id
 
+
 def student_was_late(event_id, arrival_time):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -147,10 +148,3 @@ def student_was_late(event_id, arrival_time):
     if arrival_time > late_time:
         return True
     return False
-
-
-
-
-
-    
-    
