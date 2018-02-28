@@ -93,7 +93,6 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script>
-
     function showError() {
       document.getElementById("error-bar").classList.remove('collapse');
     }
@@ -114,6 +113,7 @@
           } else {
             document.getElementById("error-bar").classList.add('collapse');
             document.cookie = "cuas_lecturer_login_session=" + res.data.session;
+            document.cookie = "cuas_lecturer_login_username=" + username;
             window.location.replace("../lecturer");
           }
         })

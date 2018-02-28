@@ -25,21 +25,57 @@ function nearestHour(date) {
 }
 
 
+
 app.controller('StartLessonController', function ($scope, $http) {
   var now = new Date();
   now.setSeconds(0, 0);
+  var nearest = nearestHour(now);
+
   $scope.event = {
     'date': now,
-    'time': {}
+    'time': {
+      'startVal': ('0' + nearest.getHours()).slice(-2) + ':00',
+      'endVal': ('0' + ((nearest.getHours() + 2) % 24)).slice(-2) + ':00'
+    }
   };
-  $scope.event.time.start = nearestHour(new Date(2018, 2, 27, 18, 00));
-  $scope.event.time.end = nearestHour(new Date(2018, 2, 27, 20, 00));
+
 
   $scope.room = {
     "code": "",
     "buildings": "",
     "coords": []
+  };
+
+
+  $scope.submitForm = function () {
+    var dateStr = $scope.event.date.toISOString().slice(0, 10) + " ";
+
+    var formData = {
+      'username': getCookie('cuas_lecturer_login_username'),
+      'room': $scope.room.code,
+      'start': dateStr + document.getElementById('startTime').value + ":00",
+      'end': dateStr + document.getElementById('endTime').value + ":00"
+    };
+
+    // Backend call to start new lesson
+    $http({
+      method: 'POST',
+      url: '/api/start-lesson',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(formData)
+    }).then(function successCallback(response) {
+      $scope.event.id = response.data.data.event_id;
+      document.getElementById("qrCard").classList.remove('collapse');
+      document.getElementById('start-button').setAttribute('disabled', 'true');
+
+    }, function errorCallback(response) {
+      alert('An error occured');
+      console.log(response);
+    });
   }
+
 
   function getRoomInfo(room) {
     $http({
@@ -68,9 +104,11 @@ app.controller('StartLessonController', function ($scope, $http) {
     });
   }
 
+
   $scope.$watch('room.code', function () {
     if ($scope.room.code && $scope.room.code.length > 1) {
       getRoomInfo($scope.room.code);
     }
   });
+
 });

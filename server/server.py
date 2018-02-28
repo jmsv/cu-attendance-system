@@ -149,12 +149,12 @@ def session_check():
 # Start lesson by creating event
 @app.route('/api/start-lesson', methods=['POST'])
 def start_lesson():
-    # Requests data for lectrurer username, room, start and end
-    # then stores it for later use
-    lecturer_username = request.form['username']
-    room = request.form['room']
-    start_str = request.form['start']
-    end_str = request.form['end']
+    post = request.get_json()
+
+    lecturer_username = post.get('username')
+    room = post.get('room')
+    start_str = post.get('start')
+    end_str = post.get('end')
 
     # If any of the values are not consistent with what is stored, then a response
     # is returned saying "parameters are missing" and an error code 400 is returned.

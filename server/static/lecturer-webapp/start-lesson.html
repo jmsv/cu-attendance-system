@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label for="firstName">Room</label>
-      <input type="text" class="form-control" id="firstName" ng-model="room.code">
+      <input type="text" style="text-transform:uppercase" class="form-control" id="firstName" ng-model="room.code">
       <div class="invalid-feedback">
         Valid room is required.
       </div>
@@ -33,7 +33,7 @@
 
     <div class="col-md-3 mb-3">
       <label for="startTime">Start</label>
-      <input type="time" class="form-control" id="startTime" value="09:00">
+      <input type="time" class="form-control" id="startTime" value="{{event.time.startVal}}">
       <div class="invalid-feedback">
         Valid time is required.
       </div>
@@ -41,7 +41,7 @@
 
     <div class="col-md-3 mb-3">
       <label for="endTime">End</label>
-      <input type="time" class="form-control" value="11:00" id="endTime">
+      <input type="time" class="form-control" id="endTime" value="{{event.time.endVal}}">
       <div class="invalid-feedback">
         Valid time is required.
       </div>
@@ -52,18 +52,22 @@
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-6AP1h8zW4FWlT7ksMx_KPfPMwjVji8&callback=myMap"></script>
 
-  <button class="btn btn-primary btn-lg btn-block" type="submit">Generate sign-in code</button>
+  <button id="start-button" class="btn btn-primary btn-lg btn-block" type="submit" ng-click="submitForm()">Generate sign-in code</button>
 
   <hr class="mb-4">
-  <h4 class="mb-3">Sign-in QR code</h4>
 
-  <a href="">
-    <div class="card mb-4" data-toggle="modal" data-target="#qrModal">
-      <div class="card-body">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data=dashboardtest123" width="100%" />
+  <div id="qrCard" class="collapse">
+    <div class="card mb-4 text-center" data-toggle="modal" data-target="#qrModal">
+      <div class="card-header">
+        <h5 style="margin:0;">Sign-in QR code</h5>
       </div>
+      <a href="">
+        <div class="card-body">
+          <img class="qr-display" ng-src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data={{event.id}}" width="100%" />
+        </div>
+      </a>
     </div>
-  </a>
+  </div>
 
   <!-- Modal for QR -->
   <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalTitle" aria-hidden="true">
@@ -76,7 +80,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data=dashboardtest123" width="100%" />
+          <img ng-src="https://api.qrserver.com/v1/create-qr-code/?format=svg&data={{event.id}}" width="100%" />
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>

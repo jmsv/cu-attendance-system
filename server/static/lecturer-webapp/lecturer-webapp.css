@@ -95,9 +95,13 @@ body {
 
 .google-maps {
   width: 100%;
-  height: 300px;
+  height: 250px;
   border-style: solid;
   border-width: 1px;
   border-color: #ced4da;
   border-radius: .25rem;
+}
+
+.qr-display {
+  background: url(static/img/loading.gif) no-repeat center center;
 }
