@@ -1,7 +1,7 @@
 var app = angular.module('cuasApp', ["ngRoute"]);
 
 app.controller('DashboardController', function ($scope) {
-  $scope.displayName = "Dennis";
+  $scope.displayName = "Ada";
   $scope.greeting = "";
 
   var today = new Date()
