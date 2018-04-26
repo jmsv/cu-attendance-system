@@ -1,9 +1,7 @@
 # cu-attendance-system
 206CDE - Real World Project - 1718JANMAY - Presentation: 2018-03-05 12:00
 
-[![Travis CI](https://travis-ci.com/jamesevickery/cu-attendance-system.svg?token=hXPPRPSZqxVqUVQf6s8p&branch=master)](https://travis-ci.com/jamesevickery/cu-attendance-system#)
-[![Discord](https://img.shields.io/discord/405022428905996288.svg)](https://discordapp.com/channels/405022428905996288/405022428905996290)
-
+[![Build Status](https://travis-ci.com/jmsv/cu-attendance-system.svg?token=hXPPRPSZqxVqUVQf6s8p&branch=master)](https://travis-ci.com/jmsv/cu-attendance-system)
 
 > __Coventry University Attendance System (cuas) is an alternative attendance management system.__
 > Students often forget their student cards, meaning they can't sign in to university lectures. Our proposed system provides an alternative/additional method of signing in using the students' phone cameras for reading QR codes, via the Tracker app. A webapp can also be used by lecturers for monitoring attendance.
@@ -48,7 +46,7 @@ First, hop into the server directory:
 cd server
 ```
 
-Then set up a Python virtual environment: Sounds scary at first, but it's just a box that Python installs packages to.
+Then set up a Python virtual environment:
 
 ```sh
 python -m virtualenv venv
@@ -84,7 +82,7 @@ As you make changes to `server.py` or any of the module files, it should automat
 
 ### Resetting the Database
 
-What was that? You fucked up the database? You fool. Fortunately I do this too tbh and made a script to reset it.
+Messed up the database? You fool. Fortunately I do this too tbh and made a script to reset it.
 
 From the `server` directory, run this:
 
