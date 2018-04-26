@@ -1,5 +1,5 @@
 # cu-attendance-system
-206CDE - Real World Project - 1718JANMAY - Presentation: 2018-03-05 12:00
+206CDE - Real World Project - 1718JANMAY - Group 8B
 
 [![Build Status](https://travis-ci.com/jmsv/cu-attendance-system.svg?token=hXPPRPSZqxVqUVQf6s8p&branch=master)](https://travis-ci.com/jmsv/cu-attendance-system)
 
@@ -11,7 +11,7 @@
 ## Links
 
 - [Google Slides presentation](https://docs.google.com/presentation/d/1FJRiusDUBAOPlAZsN0xIQXuhGP8kQTZpb0YXy6KX1Ec/edit?usp=sharing)
-- [Trello](https://trello.com/invite/b/t01Y0sO0/ff42bf7f4e8d08d8d0b28925fed4be98/206cde-8b)
+- [Trello](https://trello.com/b/t01Y0sO0)
 - [Colour scheme](https://material.io/color/#!/?primary.color=007bff&secondary.color=6c757d)
 
 ---
